@@ -9,6 +9,7 @@
         title="Vue Conference 2024"
         when="April 15, 2024"
         description="Conference about Vue and JavaScript"
+        @register="console.log('registered!')"
       />
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
