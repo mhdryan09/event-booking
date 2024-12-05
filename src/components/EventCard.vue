@@ -5,17 +5,13 @@
     <p class="p-4">{{ description }}</p>
 
     <section class="flex justify-end p-4">
-      <button
-        class="px-3 py-1 text-sm font-medium border border-gray-200 rounded-full :hover:bg-gray-100"
-        @click="$emit('register')"
-      >
-        Register
-      </button>
+      <Button label="Register" @click="$emit('register')" />
     </section>
   </div>
 </template>
 
 <script setup>
+import Button from './Button.vue';
 defineProps({
   title: String,
   when: String,
