@@ -1,7 +1,7 @@
 <template>
   <SectionCard>
     <div class="flex justify-between">
-      Booking to Vue Conference
+      {{ title }}
       <RoundButton variant="danger">Cancel</RoundButton>
     </div>
   </SectionCard>
@@ -10,4 +10,8 @@
 <script setup>
 import RoundButton from './RoundButton.vue';
 import SectionCard from './SectionCard.vue';
+
+defineProps({
+  title: String
+});
 </script>
