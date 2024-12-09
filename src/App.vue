@@ -23,7 +23,12 @@
 
     <section class="grid grid-cols-1 gap-4">
       <template v-if="!bookingsLoading">
-        <BookingItem v-for="booking in bookings" :key="booking.id" :title="booking.eventTitle" />
+        <BookingItem
+          v-for="booking in bookings"
+          :key="booking.id"
+          :title="booking.eventTitle"
+          :status="booking.status"
+        />
       </template>
       <template v-else>
         <LoadingBookingItem v-for="i in 3" :key="i" />
@@ -70,23 +75,51 @@ const fetchBookings = async () => {
 };
 
 const handleRegistration = async (event) => {
+  // cek apakah user sudah terdaftar di event ini
+  // cek id event dan id user
+  if (bookings.value.some((booking) => booking.eventId === event.id && booking.userId === 1)) {
+    alert('You have already registered for this event');
+    return;
+  }
+
   const newBooking = {
     id: Date.now().toString(),
     userId: 1,
     eventId: event.id,
-    eventTitle: event.title
+    eventTitle: event.title,
+    status: 'pending'
   };
 
-  await fetch('http://localhost:3001/bookings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      ...newBooking,
-      status: 'confirmed'
-    })
-  });
+  // add booking to the array
+  bookings.value.push(newBooking);
+
+  try {
+    const response = await fetch('http://localhost:3001/bookings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...newBooking,
+        status: 'confirmed'
+      })
+    });
+
+    if (response.ok) {
+      // find index
+      const index = bookings.value.findIndex((booking) => booking.id === newBooking.id);
+
+      // update status
+      // bookings.value[index]
+      bookings.value[index] = await response.json();
+    } else {
+      throw new Error('failed to confirm booking');
+    }
+  } catch (error) {
+    console.error(`Failed to register for event : `, error);
+    bookings.value = bookings.value.filter((booking) => booking.id !== newBooking.id);
+    // hapus dari array bookings karena gagal register
+  }
 };
 
 onMounted(() => {
