@@ -31,10 +31,10 @@
   ],
   "bookings": [
     {
-      "id": "1733702558812",
+      "id": "1733728590743",
       "userId": 1,
-      "eventId": "1",
-      "eventTitle": "Rails Conference 2024",
+      "eventId": "2",
+      "eventTitle": "Vue Conference 2023",
       "status": "confirmed"
     }
   ]
