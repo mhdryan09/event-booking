@@ -31,10 +31,10 @@
   ],
   "bookings": [
     {
-      "id": "1733728590743",
+      "id": "1733873586416",
       "userId": 1,
-      "eventId": "2",
-      "eventTitle": "Vue Conference 2023",
+      "eventId": "3",
+      "eventTitle": "PHP Conference 2022",
       "status": "confirmed"
     }
   ]

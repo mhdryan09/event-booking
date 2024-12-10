@@ -8,7 +8,7 @@
     </SectionCard>
   </template>
   <template v-else>
-    <section class="grid grid-cols-2 gap-8">
+    <section class="grid grid-cols-1 gap-8 lg:grid-cols-2">
       <template v-if="!loading">
         <template v-if="events.length">
           <EventCard
